@@ -5,6 +5,37 @@
 
 ---
 
+## 2026.11.03 — calamares-next: drop untranslated languages from the language menu
+
+### What Changed
+
+- The Calamares welcome page listed Japanese twice (`ja` and `ja-Hira`). `ja-Hira` (hiragana-only
+  Japanese) has 0 of 882 UI strings and 0 of 83 Python job strings translated, so choosing it gives an
+  English installer.
+- Upstream marks 16 languages as "incomplete": `bs es_PR fr_CA gu ie ja-Hira kn lo lv mk ne_NP ta_IN ur zh
+  zh_HK` and Telugu. All are 0–5% translated except `ie` (51%). `calamares-next` now builds without all 16,
+  `ie` included; the menu goes from 82 to 66 languages. Users of those languages pick a complete
+  sibling (`ja`, `es`, `fr`, `zh_CN`/`zh_TW`) or English, which is what they effectively got before.
+- `calamares-next` only for now; the stable `calamares` follows after a test.
+
+### Technical Details
+
+- Upstream `CMakeLists.txt` keeps the languages in `_tx_complete` / `_tx_good` / `_tx_ok` /
+  `_tx_incomplete` and appends `_tx_incomplete` to `CALAMARES_TRANSLATION_LANGUAGES` only when
+  `CALAMARES_RELEASE_MODE` is OFF. Turning release mode on would also change versioning and other build
+  behaviour, so `prepare()` instead empties the list with a range `sed`:
+  `/^set( _tx_incomplete /,/)/c\set( _tx_incomplete )` (the list spans two lines).
+- The list can't be filtered from `kiro-calamares-config`: it is compiled into libcalamares.
+- Completeness counted from `lang/calamares_<lang>.ts` (`type="unfinished"`) in the fork at `841b478`.
+- `flow-calamares-next` copies this `-17` folder to `-18` and bumps `pkgrel` itself.
+
+### Files Modified
+
+- `calamares-next-3.4.2.r4.g841b478-17/PKGBUILD`
+- `CHANGELOG.md`
+
+---
+
 ## 2026.08.25 — field verification of the `kiro-trust-desktop-launchers` fix
 
 ### What Changed
