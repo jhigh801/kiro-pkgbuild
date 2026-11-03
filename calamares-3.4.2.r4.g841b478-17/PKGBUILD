@@ -75,6 +75,10 @@ prepare() {
 
 	sed -i -e 's/"Install configuration files" OFF/"Install configuration files" ON/' "$srcdir/$_pkgname/CMakeLists.txt"
 	sed -i -e "s/desired_size = 512 \* 1024 \* 1024  \# 512MiB/desired_size = 512 \* 1024 \* 1024 \* 16  \# 8589MiB/" "$srcdir/$_pkgname/src/modules/fstab/main.py"
+
+	# Upstream's "incomplete" languages (ja-Hira, es_PR, fr_CA, …) are 0–5% translated except ie (51%):
+	# picking one gives an English installer, so keep them out of the language menu.
+	sed -i -e '/^set( _tx_incomplete /,/)/c\set( _tx_incomplete )' "$srcdir/$_pkgname/CMakeLists.txt"
 }
 
 pkgver() {

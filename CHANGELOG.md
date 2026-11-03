@@ -16,7 +16,8 @@
   zh_HK` and Telugu. All are 0–5% translated except `ie` (51%). `calamares-next` now builds without all 16,
   `ie` included; the menu goes from 82 to 66 languages. Users of those languages pick a complete
   sibling (`ja`, `es`, `fr`, `zh_CN`/`zh_TW`) or English, which is what they effectively got before.
-- `calamares-next` only for now; the stable `calamares` follows after a test.
+- Same change in the stable `calamares` the same day, on Erik's go. Its next build also moves from
+  `841b478` to the fork's newer upstream commits (see Technical Details).
 
 ### Technical Details
 
@@ -37,6 +38,7 @@
 ### Files Modified
 
 - `calamares-next-3.4.2.r4.g841b478-17/PKGBUILD`
+- `calamares-3.4.2.r4.g841b478-17/PKGBUILD`
 - `CHANGELOG.md`
 
 ---
