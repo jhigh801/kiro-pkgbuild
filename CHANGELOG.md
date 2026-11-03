@@ -28,6 +28,11 @@
 - The list can't be filtered from `kiro-calamares-config`: it is compiled into libcalamares.
 - Completeness counted from `lang/calamares_<lang>.ts` (`type="unfinished"`) in the fork at `841b478`.
 - `flow-calamares-next` copies this `-17` folder to `-18` and bumps `pkgrel` itself.
+- Built as **`calamares-next 3.4.2.r20.gd62849a-1`**, not `…r4.g841b478-18`: the fork had moved 16 commits
+  ahead (upstream partition fixes — 4k alignment on manual partitioning, no legacy Boot flag on GPT root —
+  non-geographic time zones, Transifex merges), and makepkg resets `pkgrel` to 1 when `pkgver()` changes.
+  Verified in the package: `libcalamares.so.3.4.3` no longer contains `ja-Hira`, `fr_CA` or `zh_HK`
+  (the `-17` stable lib does), while `ca@valencia` and `zh_TW` remain.
 
 ### Files Modified
 
